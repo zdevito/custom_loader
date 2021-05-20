@@ -51,6 +51,11 @@ def do_fib():
 
 )end";
 
+auto run_numpy = R"end(
+import numpy as np
+print(np.arange(10)*10)
+)end";
+
 int main(int argc, const char **argv) {
   PythonAPI a;
   PythonAPI b;
@@ -78,4 +83,5 @@ int main(int argc, const char **argv) {
   t3.join();
 
   a.run("import regex");
+  a.run(run_numpy);
 }
