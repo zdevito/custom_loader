@@ -83,5 +83,13 @@ int main(int argc, const char **argv) {
   t3.join();
 
   a.run("import regex");
-  a.run(run_numpy);
+  std::thread t4([&]{
+    a.run(run_numpy);
+  });
+  std::thread t5([&]{
+    b.run(run_numpy);
+  });
+  t4.join();
+  t5.join();
+
 }

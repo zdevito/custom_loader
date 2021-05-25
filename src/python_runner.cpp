@@ -10,6 +10,9 @@ namespace py = pybind11;
 struct PythonGuard {
   PythonGuard() {
       Py_Initialize();
+      // this has to occur on the thread that calls finalize
+      // otherwise 'assert tlock.locked()' fails
+      py::exec("import threading");
       // release GIL after startup, we will acquire on each call to run
       PyEval_SaveThread();
   }
