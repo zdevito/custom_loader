@@ -12,7 +12,7 @@ Multiple Pythons via Custom Dynamic Loading
 
 The reason having multiple Python interpreters is hard is because CPython's API has a lot of global symbols and values like the interpreter lock. By writing a custom shared library loader, we can arrange that multiple copies of Python _and its extensions libaries_ can be loaded in a single process such that they cannot see each other.  Nevertheless, data allocated in C/C++ such as PyTorch Tensors can be shared across interpreters since they exist in the same process.
 
-![loader diagram](https://github.com/zdevito/custom_loader/raw/master/extra/loader_diagram.png)
+![loader diagram](https://github.com/zdevito/custom_loader/blob/main/extra/loader_diagram.png?raw=true)
 
 A shared library loader is the part of `libc` accessed by `dlopen` which reads shared libraries into memory. The normal Unix loader is inflexible: it will only ever load a library once, and it has a fixed method for linking the symbols of that library with the running process. However, nothing stops us from writing our own loader with a more flexible API for symbol resolution:
 
